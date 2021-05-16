@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+  }
+
+  #images
+  {
+      display: inline-block;
+      padding: 1em;
+      position: relative;
+  }
+  #images img
+  {
+      display: inline;
+      width: 150px;
+      height: 150px;
+      float: left;
+      margin-right: 2em;
+      margin-bottom: 3em;
+  }
+  #results
+  {
+      display: inline-block;
+      float: left;
+      position: relative;
+      margin-right: 5em;
+  }
+  #pragraph
+  {
+      display: block;
+  }
+  #viewResult
+  {
+      display: block;
+  }
+  h1{display: block;
+  font-size: 2em;
+  margin-top: 0;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  text-align: center;
+  background-color: blue;}
+  
+  
