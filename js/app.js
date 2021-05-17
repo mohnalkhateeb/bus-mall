@@ -2,19 +2,24 @@
 let productsImage = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg',
 'dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg',
 'water-can.jpg','wine-glass.jpg']
-let indexleftImg;
-let indexrightImg;
-let indexmidImg;
+let indexleftImg = 0
+let indexrightImg =0
+let indexmidImg = 0
+let indecesArr= [];
 let leftImgEl = document.getElementById('leftImg');
 let rightImgEl = document.getElementById('rightImg');
 let midImgEl=document.getElementById('midImg');
 let product = [];
+let productNameArr = [];
+let productVoteArr = [];
+let productSeenArr = [];
 function ProductImage(productName) {
     this.productName = productName.split('.')[0];
     this.source = 'img/' + productName;
     this.vote = 0;
     this.seen = 0;
     product.push(this);
+    productNameArr.push(this.productName)
 }
 for (let i = 0; i < productsImage.length; i++) {
     new ProductImage(productsImage[i]);
@@ -24,16 +29,18 @@ function generateprductImage() {
     return Math.floor(Math.random() * product.length);
 }
 function renderImg() {
+    
     indexleftImg = generateprductImage();
     indexmidImg= generateprductImage();
     indexrightImg = generateprductImage();
-
-    while (indexleftImg === indexmidImg || indexleftImg === indexrightImg || indexmidImg === indexrightImg) {
+    while(  indexleftImg === indexmidImg || indexleftImg === indexrightImg || indexmidImg === indexrightImg || indecesArr.includes(indexleftImg)
+    || indecesArr.includes(indexmidImg) || indecesArr.includes(indexrightImg))
+    {
         indexleftImg = generateprductImage();
-        indexmidImg=generateprductImage()
-
+    indexmidImg= generateprductImage();
+    indexrightImg = generateprductImage();
     }
-
+    indecesArr = [indexleftImg,indexmidImg,indexrightImg]
     leftImgEl.setAttribute('src', product[indexleftImg].source);
     leftImgEl.setAttribute('title', product[indexleftImg].source);
     product[indexleftImg].seen++;
@@ -45,6 +52,31 @@ function renderImg() {
     rightImgEl.setAttribute('src', product[indexrightImg].source);
     rightImgEl.setAttribute('title', product[indexrightImg].source);
     product[indexrightImg].seen++;
+
+
+        console.log(indecesArr)
+    
+    /*for (let x=0;x<indecesArr.length;x++)
+    {
+        if (indexleftImg === tempindexArr[x] )
+        {indexleftImg=generateprductImage()
+        indecesArr[0]=indexleftImg;}
+        
+    }
+    for (let y=0;y<indecesArr.length;y++)
+    {
+        if (indexmidImg === tempindexArr[y] || indexleftImg === indexmidImg || indexleftImg === indexrightImg || indexmidImg === indexrightImg)
+        {indexmidImg=generateprductImage()
+        indecesArr[1]=indexmidImg;}
+        
+    }
+    for (let z=0;z<indecesArr.length;z++)
+    {
+        if (indexrightImg === indecesArr[z] ||indexleftImg === indexmidImg || indexleftImg === indexrightImg || indexmidImg === indexrightImg)
+        {indexrightImg=generateprductImage()
+        indecesArr[2]=indexrightImg}
+    }*/
+    
     
 }
 renderImg();
@@ -54,6 +86,7 @@ leftImgEl.addEventListener('click', handelClicks);
 rightImgEl.addEventListener('click', handelClicks);
 midImgEl.addEventListener('click',handelClicks);
 function handelClicks(event) {
+    
     round++;
     let spanEl = document.getElementById('votes') 
     
@@ -72,6 +105,7 @@ function handelClicks(event) {
         rightImgEl.removeEventListener('click', handelClicks);
         midImgEl.removeEventListener('click',handelClicks)
     }
+    
 }
 
 let resultButton = document.getElementById('viewResult')
@@ -82,12 +116,61 @@ function viewResult(event)
     event.preventDefault();
     let ulEl = document.getElementById('result');
     let liEl;
-    if(round >= maxround){ for (let i = 0; i < product.length; i++) {
+    if(round >= maxround)
+    { 
+        for (let i = 0; i < product.length; i++)
+         {
             liEl = document.createElement('li');
             ulEl.appendChild(liEl);
             liEl.textContent = `${product[i].productName} has ${product[i].vote} votes and was seen ${product[i].seen} times.`
+            productVoteArr.push(product[i].vote)
+            productSeenArr.push(product[i].seen)
         }
+        chartrender()
     }
        
         
+}
+function chartrender(){
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: productNameArr,
+        datasets: [{
+            label: '# of Votes',
+            data: productVoteArr,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+            ],
+            borderColor: [
+                
+                'rgba(255, 206, 86, 1)',
+                
+            ],
+            borderWidth: 2
+            
+        },{ label: '# of seen',
+        data: productSeenArr,
+        backgroundColor: [
+            
+            'rgba(153, 102, 255, 0.2)',
+            
+        ],
+        borderColor: [
+            
+            'rgba(54, 162, 235, 1)',
+            
+        ],
+        borderWidth: 2}]
+        
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 }
