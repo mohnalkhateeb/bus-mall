@@ -56,6 +56,6 @@ font-size: 1em;
   #algorithm
   {
       display: inline-block;
-      position: absolute;
+      position: relative;
   }
   
