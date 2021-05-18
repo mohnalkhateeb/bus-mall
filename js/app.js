@@ -42,8 +42,8 @@ function renderImg() {
 
     {
         indexleftImg = generateprductImage();
-    indexmidImg= generateprductImage();
-    indexrightImg = generateprductImage();
+        indexmidImg= generateprductImage();
+        indexrightImg = generateprductImage();
     }
     indecesArr = [indexleftImg,indexmidImg,indexrightImg]
     leftImgEl.setAttribute('src', product[indexleftImg].source);
