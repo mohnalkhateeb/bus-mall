@@ -29,15 +29,14 @@ function generateprductImage() {
     //0-1 >> 0-7
     return Math.floor(Math.random() * product.length);
 }
-function renderImg() {
+function renderImg(){
     
     indexleftImg = generateprductImage();
     indexmidImg= generateprductImage();
     indexrightImg = generateprductImage();
     while(  indexleftImg === indexmidImg || indexleftImg === indexrightImg || indexmidImg === indexrightImg ||
         indecesArr.indexOf(indexleftImg) != -1 || indecesArr.indexOf(indexmidImg) != -1 || indecesArr.indexOf(indexrightImg) != -1)
-
-    {
+         {
         indexleftImg = generateprductImage();
         indexmidImg= generateprductImage();
         indexrightImg = generateprductImage();
@@ -55,7 +54,7 @@ function renderImg() {
     rightImgEl.setAttribute('title', product[indexrightImg].source);
     product[indexrightImg].seen++;
 
-
+}
         //console.log(indecesArr)
     
     /*for (let x=0;x<indecesArr.length;x++)
@@ -80,7 +79,6 @@ function renderImg() {
     }*/
     
     
-}
 renderImg();
 let round=0;
 let maxround =25;
