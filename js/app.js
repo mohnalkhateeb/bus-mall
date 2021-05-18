@@ -38,8 +38,8 @@ function renderImg() {
         indecesArr.indexOf(indexleftImg) != -1 || indecesArr.indexOf(indexmidImg) != -1 || indecesArr.indexOf(indexrightImg) != -1)
     {
         indexleftImg = generateprductImage();
-    indexmidImg= generateprductImage();
-    indexrightImg = generateprductImage();
+        indexmidImg= generateprductImage();
+        indexrightImg = generateprductImage();
     }
     indecesArr = [indexleftImg,indexmidImg,indexrightImg]
     leftImgEl.setAttribute('src', product[indexleftImg].source);
