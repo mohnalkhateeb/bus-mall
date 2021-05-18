@@ -20,6 +20,7 @@ function ProductImage(productName) {
     this.seen = 0;
     product.push(this);
     productNameArr.push(this.productName)
+    //settingItems();
 }
 for (let i = 0; i < productsImage.length; i++) {
     new ProductImage(productsImage[i]);
@@ -108,20 +109,19 @@ function handelClicks(event) {
         leftImgEl.removeEventListener('click', handelClicks);
         rightImgEl.removeEventListener('click', handelClicks);
         midImgEl.removeEventListener('click',handelClicks)
+        resultButton.disabled=false;
     }
     
 }
 
 let resultButton = document.getElementById('viewResult')
 resultButton.addEventListener('click',viewResult)
-
-function viewResult(event)
+function viewResult()
 {
-    event.preventDefault();
+    settingItems();
     let ulEl = document.getElementById('result');
+    ulEl.textContent=''
     let liEl;
-    if(round >= maxround)
-    { 
         for (let i = 0; i < product.length; i++)
          {
             liEl = document.createElement('li');
@@ -129,15 +129,20 @@ function viewResult(event)
             liEl.textContent = `${product[i].productName} has ${product[i].vote} votes and was seen ${product[i].seen} times.`
             productVoteArr.push(product[i].vote)
             productSeenArr.push(product[i].seen)
-        }
-        chartrender()
-    }
+         }
+         
+           chartrender()
        
+        resultButton.disabled=true;
+    
+            
         
 }
+resultButton.removeEventListener('click',viewResult)
+resultButton.addEventListener('click',viewResult)
 function chartrender(){
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
+let  ctx = document.getElementById('myChart').getContext('2d');
+let myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: productNameArr,
@@ -178,3 +183,21 @@ var myChart = new Chart(ctx, {
     }
 });
 }
+function settingItems() {
+    let data = JSON.stringify(product);
+    //console.log(data)
+    localStorage.setItem('Product', data);
+}
+
+function gettingItems() {
+    let stringObj = localStorage.getItem('Product');
+    // console.log(stringObj);
+    let normalObj = JSON.parse(stringObj);
+    // console.log(normalObj);
+    if (normalObj !== null) {
+        product = normalObj;
+    }
+    //viewResult()
+    
+}
+gettingItems();
