@@ -37,9 +37,6 @@ function renderImg() {
     while(  indexleftImg === indexmidImg || indexleftImg === indexrightImg || indexmidImg === indexrightImg ||
         indecesArr.indexOf(indexleftImg) != -1 || indecesArr.indexOf(indexmidImg) != -1 || indecesArr.indexOf(indexrightImg) != -1)
 
-        indecesArr.indexOf(indexleftImg) != -1 
-    || indecesArr.indexOf(indexmidImg) != -1 || indecesArr.indexOf(indexrightImg) != -1)
-
     {
         indexleftImg = generateprductImage();
     indexmidImg= generateprductImage();
