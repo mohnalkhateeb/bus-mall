@@ -118,7 +118,7 @@ let resultButton = document.getElementById('viewResult')
 resultButton.addEventListener('click',viewResult)
 function viewResult()
 {
-    settingItems();
+    
     let ulEl = document.getElementById('result');
     ulEl.textContent=''
     let liEl;
@@ -135,7 +135,7 @@ function viewResult()
        
         resultButton.disabled=true;
     
-            
+        settingItems();   
         
 }
 resultButton.removeEventListener('click',viewResult)
