@@ -54,7 +54,7 @@ function renderImg(){
     rightImgEl.setAttribute('title', product[indexrightImg].source);
     product[indexrightImg].seen++;
 
-}
+
         //console.log(indecesArr)
     
     /*for (let x=0;x<indecesArr.length;x++)
@@ -78,7 +78,7 @@ function renderImg(){
         indecesArr[2]=indexrightImg}
     }*/
     
-    
+}  
 renderImg();
 let round=0;
 let maxround =25;
