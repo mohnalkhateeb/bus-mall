@@ -20,7 +20,17 @@
       float: left;
       margin-right: 2em;
       margin-bottom: 3em;
+      transform: skew(5deg, -20deg);
+      transition-property: background, border-radius;
+    transition-duration: 1s;
+    transition-timing-function: linear;
       
+      
+  }
+  #images img:hover{
+    animation: spin 5s linear infinite;
+    transform: skew(5deg, -20deg);
+    border-radius: 50%;
   }
   #results
   {
@@ -98,3 +108,17 @@ canvas
 {
     
 }  
+@keyframes spin {
+    0% {
+      transform: rotateY(0deg);
+    }
+    100% {
+      transform: rotateY(360deg);
+    }
+  }
+  .box-1 {
+    transform: scale(.75);
+  }
+  .box-2 {
+    transform: scale(1.25);
+  }

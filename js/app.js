@@ -13,6 +13,7 @@ let product = [];
 let productNameArr = [];
 let productVoteArr = [];
 let productSeenArr = [];
+// creete the ProductImage Constructure 
 function ProductImage(productName) {
     this.productName = productName.split('.')[0];
     this.source = 'img/' + productName;
@@ -22,13 +23,16 @@ function ProductImage(productName) {
     productNameArr.push(this.productName)
     //settingItems();
 }
+// fill the array of object 
 for (let i = 0; i < productsImage.length; i++) {
     new ProductImage(productsImage[i]);
 }
+// to create the random number to chooose the image randomly 
 function generateprductImage() {
     //0-1 >> 0-7
     return Math.floor(Math.random() * product.length);
 }
+// to render image 
 function renderImg(){
     
     indexleftImg = generateprductImage();
@@ -82,6 +86,7 @@ function renderImg(){
 renderImg();
 let round=0;
 let maxround =25;
+// view result 
 leftImgEl.addEventListener('click', handelClicks);
 rightImgEl.addEventListener('click', handelClicks);
 midImgEl.addEventListener('click',handelClicks);
@@ -108,7 +113,7 @@ function handelClicks(event) {
     }
     
 }
-
+// show result in the ul element 
 let resultButton = document.getElementById('viewResult')
 resultButton.addEventListener('click',viewResult)
 function viewResult()
@@ -135,6 +140,7 @@ function viewResult()
 }
 resultButton.removeEventListener('click',viewResult)
 resultButton.addEventListener('click',viewResult)
+// create chart 
 function chartrender(){
 let  ctx = document.getElementById('myChart').getContext('2d');
 let myChart = new Chart(ctx, {
@@ -178,12 +184,13 @@ let myChart = new Chart(ctx, {
     }
 });
 }
+// sotoring in local storge 
 function settingItems() {
     let data = JSON.stringify(product);
     //console.log(data)
     localStorage.setItem('Product', data);
 }
-
+// getting data from local storge 
 function gettingItems() {
     let stringObj = localStorage.getItem('Product');
     // console.log(stringObj);
